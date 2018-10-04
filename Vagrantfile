@@ -23,7 +23,9 @@ Vagrant.configure("2") do |config|
   SHELL
 
   # Share the current folder with the guest OS, owned by web
-  config.vm.synced_folder "..", "/home/web/app", group: "web", owner: "web"
+  config.vm.synced_folder "..", "/home/web/app"
+
+  config.vm.provision "shell", inline: "chown -R web:web /home/web/app"
 
   # Copy angel.service, and angel.conf
   config.vm.provision "file", source: "angel.service", destination: "/etc/systemd/system/angel.service"
