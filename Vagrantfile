@@ -36,8 +36,9 @@ Vagrant.configure("2") do |config|
     ln -s /home/vagrant/angel.conf /etc/nginx/sites-enabled/angel.conf
   SHELL
 
-  # Start the service
+  # Start the service, after running `pub get`
   config.vm.provision "shell", inline: <<-SHELL
+    runuser -l web -c 'pub get'
     systemctl daemon-reload
     service angel start
   SHELL
