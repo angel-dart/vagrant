@@ -28,8 +28,13 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", inline: "chown -R web:web /home/web/app"
 
   # Copy angel.service, and angel.conf
-  config.vm.provision "file", source: "angel.service", destination: "/etc/systemd/system/angel.service"
-  config.vm.provision "file", source: "angel.conf", destination: "/etc/nginx/sites-enabled/angel.conf"
+  config.vm.provision "file", source: "angel.service", destination: "/home/vagrant/angel.service"
+  config.vm.provision "file", source: "angel.conf", destination: "/home/vagrant/angel.conf"
+
+  config.vm.provision "shell", inline: <<-SHELL
+    ln -s /home/vagrant/angel.service /etc/systemd/system/angel.service
+    ln -s /home/vagrant/angel.conf /etc/nginx/sites-enabled/angel.conf
+  SHELL
 
   # Start the service
   config.vm.provision "shell", inline: <<-SHELL
