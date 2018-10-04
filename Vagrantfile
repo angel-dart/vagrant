@@ -38,7 +38,7 @@ Vagrant.configure("2") do |config|
 
   # Start the service, after running `pub get`
   config.vm.provision "shell", inline: <<-SHELL
-    runuser -l web -c '/usr/lib/dart/bin/pub get'
+    su web -c "bash -c 'cd /home/web/app && /usr/lib/dart/bin/pub get'"
     systemctl daemon-reload
     service angel start
   SHELL
