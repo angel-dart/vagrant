@@ -25,8 +25,7 @@ Vagrant.configure("2") do |config|
   # Share the current folder with the guest OS, owned by web
   config.vm.synced_folder "..", "/home/web/app"
 
-  config.vm.provision "shell", inline: "chown -R web:web /home/web"
-
+  
   # Copy angel.service, and angel.conf
   config.vm.provision "file", source: "angel.service", destination: "/home/vagrant/angel.service"
   config.vm.provision "file", source: "angel.conf", destination: "/home/vagrant/angel.conf"
@@ -37,6 +36,7 @@ Vagrant.configure("2") do |config|
   SHELL
 
   # Start the service, after running `pub get`
+  config.vm.provision "shell", inline: "chown -R web:web /home/web"
   config.vm.provision "shell", inline: <<-SHELL
     su web -c "bash -c 'cd /home/web/app && /usr/lib/dart/bin/pub get'"
     systemctl daemon-reload
