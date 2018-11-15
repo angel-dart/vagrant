@@ -19,6 +19,6 @@ echo 'PATH="/usr/lib/dart/bin:$PATH"' >> ~/.bashrc
 source ~/.bashrc
 
 # Finally, link our new service.
-ln -s /home/vagrant/angel.conf /etc/nginx/sites-enabled/angel.conf
+ln -s /home/vagrant/angel.service /etc/systemd/system/angel.service
 systemctl daemon-reload
 systemctl enable angel
