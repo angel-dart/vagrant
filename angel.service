@@ -3,8 +3,8 @@ Description=`angel` server
 
 [Service]
 Environment=ANGEL_ENV=production
-User=web # Name of unprivileged `web` user
-WorkingDirectory=/home/web/app # Path to `angel` project
+User=vagrant
+WorkingDirectory=/home/vagrant/app # Path to `angel` project
 ExecStart=/usr/lib/dart/bin/dart bin/prod.dart
 Restart=always # Restart process on crash
 
